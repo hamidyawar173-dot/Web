@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Today — {{ city }}</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<style>
+  body {
+    margin: 0;
+    font-family: Inter, Arial, sans-serif;
+    background: url("https://thumbs.dreamstime.com/b/incredibly-beautiful-sunset-sun-lake-sunrise-landscape-panorama-nature-sky-amazing-colorful-clouds-fantasy-design-115177001.jpg")
+      center/cover no-repeat fixed;
+  }
+
+  .card {
+    margin: 50px auto;
+    width: 330px;
+    padding: 20px 22px;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    color: white;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  }
+
+  .city {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    text-transform: capitalize;
+  }
+
+  .row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .temp-big {
+    font-size: 32px;
+    font-weight: 900;
+  }
+
+  .icon {
+    font-size: 34px;
+  }
+
+  .datetime {
+    margin-top: 12px;
+    font-size: 13px;
+    opacity: 0.9;
+  }
+</style>
+
+</head>
+<body>
+
+<div class="card">
+
+  <div class="city">{{ city }}</div>
+
+  <div class="row">
+    <div class="icon">{{ icon }}</div>
+
+    <div class="temp-big">
+      Hi: {{ today_high }}°  
+      Lo: {{ today_low }}°
+    </div>
+  </div>
+
+  <div id="datetime" class="datetime">--</div>
+
+</div>
+
+<script>
+  function updateDT() {
+    const now = new Date();
+    const el = document.getElementById("datetime");
+
+    const date = now.toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric"
+    });
+
+    const time = now.toLocaleTimeString("en-US", {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    });
+
+    el.textContent = `${date} ${time}`;
+  }
+
+  updateDT();
+  setInterval(updateDT, 1000);
+</script>
+
+</body>
+</html>

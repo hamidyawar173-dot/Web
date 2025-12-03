@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{{ city }} — Weather</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    :root{ --nav-height:56px; --accent:#f05a24; }
+    html,body{height:100%; margin:0; font-family:Inter,Arial,sans-serif; color:#fff;}
+    body{
+      background: url("https://assets.msccruises.com/is/image/msccruises/MSC25040237new?qlt=85&ts=1761316813369&dpr=on,2.625") center/cover no-repeat fixed;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    .top-nav { display:none; }
+
+    .top-buttons {
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding: 14px 22px;
+      display: flex;
+      gap: 22px;
+      z-index: 9999;                 
+      align-items: center;
+      pointer-events: auto;          
+    }
+
+    .top-link {
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      color: white;
+      background: transparent;
+      transition: 0.16s ease;
+      letter-spacing: 0.6px;
+      padding: 6px 8px;
+      border-radius: 8px;
+    }
+
+    .top-link:hover {
+      color: #21343b;
+      cursor: pointer;
+      text-decoration: none;
+      background: rgba(255,255,255,0.92);
+    }
+
+    .top-link.active {
+      color: #21343b;
+      background: rgba(255,255,255,0.92);
+    }
+
+    main{
+      max-width:1100px;
+      margin: 40px auto;
+      padding: 20px;
+      display:flex;
+      justify-content:center;
+      align-items:flex-start;
+    }
+
+    .card {
+      width:380px;
+      padding:20px 22px;
+      border-radius:12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.28));
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 18px 44px rgba(0,0,0,0.45);
+      color:#fff;
+      border: 1px solid rgba(255,255,255,0.18);
+      text-align:left;
+    }
+
+    .city { font-size:18px; font-weight:800; margin-bottom:8px; text-transform:lowercase; text-shadow:0 3px 6px rgba(0,0,0,0.35); }
+    .temp-row { display:flex; gap:12px; align-items:center; margin-bottom:6px; }
+    .weather-icon { font-size:34px; width:48px; text-align:center; }
+    .temp-value { font-size:30px; font-weight:900; text-shadow:0 6px 12px rgba(0,0,0,0.45); }
+    .time { font-size:12px; color:rgba(255,255,255,0.9); margin-top:6px; }
+    .back { display:inline-block; margin-top:12px; padding:8px 12px; background:rgba(0,0,0,0.6); color:#fff; border-radius:6px; text-decoration:none; }
+
+    @media (max-width:520px){
+      .card { width:92%; padding:16px; }
+      .temp-value { font-size:26px; }
+      .weather-icon { font-size:28px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="top-buttons">
+  <a class="top-link" href="/weather/{{ city }}/hourly">HOURLY WEATHER</a>
+  <a class="top-link" href="/weather/{{ city }}/today">TODAY WEATHER</a>  
+  <a class="top-link" href="/weather/{{ city }}/daily">DAILY WEATHER</a>
+</div>
+
+<main>
+  <div class="card" role="region" aria-live="polite">
+    <div class="city">{{ city }}</div>
+
+    <div class="temp-row">
+      <div class="weather-icon">{% if icon %}{{ icon }}{% else %}🌙{% endif %}</div>
+      <div class="temp-value">{{ temp }}°C</div>
+    </div>
+
+    <div class="time">{{ dt }}</div>
+
+    <a href="/" class="back">← Back to Search</a>
+  </div>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Daily — {{ city }}</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+  :root{ --panel-bg: rgba(255,255,255,0.98); --muted:#6b7780; --hr:#e6e9ee; }
+
+  html,body{
+    height:100%;
+    margin:0;
+    font-family:Inter,Arial,sans-serif;
+    background:url("https://thumbs.dreamstime.com/b/incredibly-beautiful-sunset-sun-lake-sunrise-landscape-panorama-nature-sky-amazing-colorful-clouds-fantasy-design-115177001.jpg")
+      center/cover no-repeat fixed;
+    color:#111;
+  }
+
+  .wrap{
+    max-width:1100px;
+    margin:88px auto;
+    padding:0 18px;
+  }
+
+  .panel{
+    background: rgba(255, 255, 255, 0.003);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius:18px;
+    padding:10px 0;
+    box-shadow:0 6px 30px rgba(0,0,0,0.35);
+    border:1px solid rgba(255, 255, 255, 0.109);
+  }
+
+  .panel-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 24px;
+    border-bottom:1px solid rgba(255,255,255,0.2);
+  }
+
+  .panel-head .title{
+    font-size:13px;
+    font-weight:800;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:white;
+  }
+
+  .panel-head .date{
+    font-size:13px;
+    font-weight:700;
+    color:white;
+  }
+
+  .list{padding:8px 0;}
+
+  .day-row{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    padding:14px 24px;
+    border-bottom:1px solid rgba(255,255,255,0.15);
+    color:white;
+  }
+
+  .day-row:last-child{border-bottom:none;}
+
+  .day-left{width:90px;font-weight:800;color:white;}
+
+  .day-left div{color:white;}
+
+  .day-icon{
+    width:60px;
+    text-align:center;
+    font-size:22px;
+  }
+
+  .day-temp{
+    width:100px;
+    text-align:center;
+    font-weight:800;
+    font-size:20px;
+    color:white;
+  }
+
+  .day-desc{
+    flex:1;
+    color:white;
+  }
+
+  .day-desc div:first-child{
+    font-weight:700;
+    color:white;
+  }
+
+  .day-desc div:last-child{
+    margin-top:6px;
+    font-size:13px;
+    opacity:0.85;
+  }
+
+  @media (max-width:720px){
+    .panel-head{padding:12px}
+    .day-row{padding:12px}
+  }
+</style>
+</head>
+<body>
+
+  <div class="wrap">
+
+    <div class="panel">
+      <div class="panel-head">
+        <div class="title">5-DAY WEATHER FORECAST</div>
+        <div class="date">{{ city|capitalize }}</div>
+      </div>
+
+      <div class="list">
+        {% if days %}
+          {% for d in days %}
+            <div class="day-row" role="article" aria-label="forecast {{ d.label }}">
+              <div class="day-left">
+                <div style="font-size:13px; opacity:0.85;">{{ d.date }}</div>
+                <div style="margin-top:6px; color:white;">{{ d.label }}</div>
+              </div>
+
+              <div class="day-icon">{{ d.icon }}</div>
+
+              <div class="day-temp">
+                {% if d.label == 'TONIGHT' %}
+                  <div style="font-size:22px;">{{ d.lo }}° <span style="font-size:12px; opacity:0.85;">Lo</span></div>
+                {% else %}
+                  <div style="font-size:22px;">{{ d.hi }}° <span style="font-size:12px; opacity:0.85;">{{ d.lo }}°</span></div>
+                {% endif %}
+              </div>
+
+              <div class="day-desc">
+                <div>{{ d.desc }}</div>
+                <div>{{ d.desc }}</div>
+              </div>
+
+            </div>
+          {% endfor %}
+        {% else %}
+          <div style="padding:24px 18px; color:white;">No forecast available.</div>
+        {% endif %}
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

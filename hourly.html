@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hourly — {{ city }}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body{
+        margin:0;
+        font-family: Inter, Arial, sans-serif;
+        background:#ffffff;
+        color:#111;
+        background: url('https://thumbs.dreamstime.com/b/incredibly-beautiful-sunset-sun-lake-sunrise-landscape-panorama-nature-sky-amazing-colorful-clouds-fantasy-design-115177001.jpg') center/cover no-repeat fixed;
+    }
+
+    .header{
+        font-size:26px;
+        font-weight:900;
+        padding:28px;
+    }
+
+    .container{
+        width:95%;
+        margin:auto;
+        padding:20px;
+        background: rgba(0,0,0,0.0);     
+        border-radius:14px;
+        overflow-x:auto;
+        white-space:nowrap;
+    }
+    .hour-box{
+        display:inline-block;
+        width:110px;
+        padding:14px;
+        margin-right:12px;
+
+        background: rgba(255,255,255,0.15);  
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+
+        border-radius:10px;
+        text-align:center;
+        border:1px solid rgba(255,255,255,0.3);
+        box-shadow:0 8px 18px rgba(0,0,0,0.3);
+    }
+
+
+    .time{
+        font-size:14px;
+        font-weight:700;
+        color:#333;
+        margin-bottom:8px;
+    }
+
+    .icon{
+        font-size:32px;
+        margin-bottom:6px;
+    }
+
+    .temp{
+        font-size:22px;
+        font-weight:900;
+        margin-bottom:6px;
+    }
+
+    .extra{
+        font-size:12px;
+        color:#777;
+    }
+
+    .back{
+        position:fixed;
+        top:20px;
+        right:20px;
+        padding:10px 16px;
+        background:#333;
+        color:#fff;
+        border-radius:8px;
+        text-decoration:none;
+        font-weight:700;
+    }
+
+</style>
+</head>
+<body>
+
+
+<div class="header">{{ city }}</div>
+
+<div class="container">
+
+{% for h in hourly %}
+    <div class="hour-box">
+        <div class="time">{{ h.time }}</div>
+        <div class="icon">{{ h.icon }}</div>
+        <div class="temp">{{ h.temp }}°</div>
+    </div>
+{% endfor %}
+
+</div>
+
+</body>
+</html>
